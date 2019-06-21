@@ -2,12 +2,12 @@ const db = require('../data/dbConfig.js');
 
 module.exports = {
   insert,
-  remove
+  getAll
 };
 
-function insert(user) {
+function insert(game) {
   return db('games')
-    .insert(user, 'id')
+    .insert(game, 'id')
     .then(ids => {
       return db('games')
         .where({ id: ids[0] })
@@ -15,8 +15,6 @@ function insert(user) {
     });
 }
 
-function remove(id) {
-  return db('games')
-    .where('id', id)
-    .del();
+function getAll() {
+  return db('games');
 }
